@@ -24,7 +24,7 @@ const App = () => {
 
 	const Subscribe = () => {
 		const key =
-			'BDk-kDxLswQMajg9TJqpb9VFTjQeQmS0FE_rTVJ4f9G-v9GFkzcDt-vYkvz5dVkbCfrGmJeLTbvuNUKpOUojWB4'
+			'BA2FfcD9savnPWC7GZUxtSJloSBJOJZNOGZTKBUeRm1KwDRJzO4KHSr3E6M7HYCT2vFTepjzR5yyeMFCHjOyzkA'
 
 		global.registration.pushManager
 			.subscribe({
