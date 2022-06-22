@@ -34,16 +34,11 @@ const App = () => {
 			.then(pushSubscription => {
 				console.log('Subscribed!')
 
-				const subscriptionObject = JSON.stringify(pushSubscription)
-
-				fetch('http://localhost:8080/subscribe', {
+				fetch('http://localhost:8080/api/subscribe', {
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: {
-						subscriptionObject,
-					},
+					body: JSON.stringify({
+						subscriptionObject: pushSubscription,
+					}),
 				})
 					.then(response => {
 						if (!response.ok) {
