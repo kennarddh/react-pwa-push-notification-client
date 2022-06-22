@@ -36,25 +36,19 @@ const App = () => {
 
 				fetch('http://localhost:8080/api/subscribe', {
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: {
-						subscriptionObject: pushSubscription,
-					},
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw new Error('Bad status code from server.')
-						}
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						subscriptionObject: JSON.parse(
+							JSON.stringify(pushSubscription)
+						),
+					}),
+				}).then(response => {
+					if (!response.ok) {
+						throw new Error('Bad status code from server.')
+					}
 
-						return response.json()
-					})
-					.then(responseData => {
-						if (!(responseData.data && responseData.data.success)) {
-							throw new Error('Bad response from server.')
-						}
-					})
+					return response.json()
+				})
 			})
 			.catch(error => {
 				console.log('Did not subscribe.', error)
