@@ -30,11 +30,13 @@ const App = () => {
 	const Subscribe = () => {
 		Unsubscribe(key)
 
-		global.registration.pushManager
-			.subscribe({
-				userVisibleOnly: true,
-				applicationServerKey: urlBase64ToUint8Array(key),
-			})
+		navigator.serviceWorker.ready
+			.then(registration =>
+				registration.pushManager.subscribe({
+					userVisibleOnly: true,
+					applicationServerKey: urlBase64ToUint8Array(key),
+				})
+			)
 			.then(pushSubscription => {
 				console.log('Subscribed!')
 
@@ -60,8 +62,8 @@ const App = () => {
 	}
 
 	const Unsubscribe = key => {
-		global.registration.pushManager
-			.getSubscription()
+		navigator.serviceWorker.ready
+			.then(registration => registration.pushManager.getSubscription())
 			.then(pushSubscription => {
 				if (!pushSubscription) return
 
