@@ -85,11 +85,8 @@ self.addEventListener('push', event => {
 	const message =
 		data.message || "Here's something you might want to check out."
 
-	const icon = 'images/new-notification.png'
-
 	new self.Notification(title, {
 		body: message,
 		tag: 'simple-push-demo-notification',
-		icon: icon,
 	})
 })
