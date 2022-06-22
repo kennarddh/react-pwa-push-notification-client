@@ -76,17 +76,15 @@ self.addEventListener('push', event => {
 	if (!(self.Notification && self.Notification.permission === 'granted'))
 		return
 
-	let data = {}
+	const data = event.data.json()
 
-	if (event.data) data = event.data.json()
+	const title = data.title
 
-	const title = data.title || 'Something Has Happened'
+	const message = data.message
 
-	const message =
-		data.message || "Here's something you might want to check out."
-
-	new self.Notification(title, {
+	const promiseChain = self.registration.showNotification(title, {
 		body: message,
-		tag: 'simple-push-demo-notification',
 	})
+
+	event.waitUntil(promiseChain)
 })
