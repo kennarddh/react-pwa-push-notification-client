@@ -35,6 +35,28 @@ const App = () => {
 				console.log('Subscribed!')
 
 				const subscriptionObject = JSON.stringify(pushSubscription)
+
+				fetch('http://localhost:8080/subscribe', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: {
+						subscriptionObject,
+					},
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Bad status code from server.')
+						}
+
+						return response.json()
+					})
+					.then(responseData => {
+						if (!(responseData.data && responseData.data.success)) {
+							throw new Error('Bad response from server.')
+						}
+					})
 			})
 			.catch(error => {
 				console.log('Did not subscribe.', error)
