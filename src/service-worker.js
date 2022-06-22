@@ -71,3 +71,25 @@ self.addEventListener('message', event => {
 })
 
 // Any other custom service worker logic can go here.
+
+self.addEventListener('push', event => {
+	if (!(self.Notification && self.Notification.permission === 'granted'))
+		return
+
+	let data = {}
+
+	if (event.data) data = event.data.json()
+
+	const title = data.title || 'Something Has Happened'
+
+	const message =
+		data.message || "Here's something you might want to check out."
+
+	const icon = 'images/new-notification.png'
+
+	new self.Notification(title, {
+		body: message,
+		tag: 'simple-push-demo-notification',
+		icon: icon,
+	})
+})
