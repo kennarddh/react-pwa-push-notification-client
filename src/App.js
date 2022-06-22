@@ -36,9 +36,12 @@ const App = () => {
 
 				fetch('http://localhost:8080/api/subscribe', {
 					method: 'POST',
-					body: JSON.stringify({
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: {
 						subscriptionObject: pushSubscription,
-					}),
+					},
 				})
 					.then(response => {
 						if (!response.ok) {
